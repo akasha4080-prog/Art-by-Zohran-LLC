@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art by Zohran</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+    font-family:Georgia,serif;
+    background:#f5f0e8;
+    color:#181512;
+    line-height:1.6;
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+/* ================= NAV ================= */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:#191613;
+    color:white;
+    padding:17px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:24px;
+    letter-spacing:2px;
+    white-space:nowrap;
+}
+
+.nav-links{
+    display:flex;
+    gap:22px;
+    font-family:Arial,sans-serif;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:#d5ad69;
+}
+
+.nav-buttons{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.cart-button,
+.admin-button{
+    padding:9px 14px;
+    border:1px solid #d5ad69;
+    background:transparent;
+    color:#d5ad69;
+    border-radius:3px;
+}
+
+.admin-button{
+    background:#d5ad69;
+    color:#191613;
+    font-weight:bold;
+}
+
+.cart-button:hover{
+    background:#d5ad69;
+    color:#191613;
+}
+
+.admin-button:hover{
+    background:white;
+    border-color:white;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:90vh;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:55px;
+    padding:80px 7%;
+    background:#191613;
+    color:white;
+}
+
+.hero small{
+    letter-spacing:5px;
+    color:#cba66a;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+}
+
+.hero h1{
+    font-size:clamp(60px,9vw,120px);
+    line-height:.9;
+    margin:25px 0;
+}
+
+.hero p{
+    color:#c9c0b5;
+    font-size:19px;
+    max-width:560px;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 25px;
+    border:1px solid #d5ad69;
+    color:#d5ad69;
+    background:transparent;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#d5ad69;
+    color:#191613;
+}
+
+.btn-gold{
+    background:#d5ad69;
+    color:#191613;
+}
+
+.hero-image{
+    height:580px;
+    background:
+      radial-gradient(circle at 35% 25%,#e4bf79,transparent 18%),
+      radial-gradient(circle at 70% 65%,#513c2b,transparent 30%),
+      radial-gradient(circle at 40% 75%,#090807,transparent 28%),
+      linear-gradient(135deg,#514435,#171310);
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-image:before{
+    content:"";
+    position:absolute;
+    inset:30px;
+    border:1px solid rgba(255,255,255,.25);
+}
+
+.hero-image span{
+    position:absolute;
+    bottom:30px;
+    right:30px;
+    letter-spacing:6px;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    padding:90px 7%;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.heading small{
+    color:#96713e;
+    letter-spacing:4px;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+}
+
+.heading h2{
+    font-size:52px;
+    margin-top:12px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.product{
+    background:white;
+    border:1px solid #ded5ca;
+    transition:.3s;
+    overflow:hidden;
+}
+
+.product:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+}
+
+.product-image{
+    height:360px;
+    background:#302820;
+    position:relative;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.art-placeholder{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#d5ad69;
+    font-family:Arial,sans-serif;
+    letter-spacing:3px;
+    background:
+      radial-gradient(circle at 30% 30%,#d5ad69,transparent 15%),
+      radial-gradient(circle at 70% 70%,#5d4733,transparent 30%),
+      linear-gradient(135deg,#191613,#6c5238);
+}
+
+/* SOLD OUT BADGE */
+
+.sold-badge{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:#9d2020;
+    color:white;
+    padding:8px 13px;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1px;
+    z-index:5;
+}
+
+.product.sold .product-image{
+    opacity:.72;
+}
+
+.product-info{
+    padding:25px;
+}
+
+.product-info h3{
+    font-size:23px;
+    margin-bottom:6px;
+}
+
+.product-price{
+    color:#94703d;
+    font-weight:bold;
+    font-family:Arial,sans-serif;
+    margin-bottom:8px;
+}
+
+.product-desc{
+    color:#756d64;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.product-actions{
+    display:flex;
+    gap:10px;
+}
+
+.product-actions button{
+    flex:1;
+    padding:11px;
+    border:1px solid #181512;
+    background:white;
+}
+
+.product-actions button:hover{
+    background:#181512;
+    color:white;
+}
+
+.product-actions button:disabled{
+    background:#ddd7d0;
+    color:#888;
+    border-color:#ddd7d0;
+    cursor:not-allowed;
+}
+
+/* ================= COMMISSION ================= */
+
+.commission{
+    background:#1b1714;
+    color:white;
+    text-align:center;
+}
+
+.commission h2{
+    font-size:60px;
+    line-height:1.05;
+    margin-bottom:20px;
+}
+
+.commission p{
+    max-width:650px;
+    margin:0 auto 30px;
+    color:#c7beb3;
+    font-family:Arial,sans-serif;
+}
+
+/* ================= WHY ================= */
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+.why{
+    border-top:1px solid #181512;
+    padding-top:25px;
+}
+
+.why-icon{
+    font-size:30px;
+}
+
+.why h3{
+    margin:12px 0;
+}
+
+.why p{
+    color:#70675e;
+    font-family:Arial,sans-serif;
+    font-size:14px;
+}
+
+/* ================= LESSONS ================= */
+
+.lessons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+    background:#e7ddd1;
+}
+
+.lessons h2{
+    font-size:58px;
+    line-height:1;
+    margin:15px 0;
+}
+
+.lessons p{
+    color:#665e55;
+    font-family:Arial,sans-serif;
+    margin-bottom:25px;
+}
+
+.lesson-box{
+    background:#1b1714;
+    color:white;
+    padding:50px;
+}
+
+.lesson-box h3{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.lesson-box div{
+    border-bottom:1px solid #50483f;
+    padding:13px 0;
+    font-family:Arial,sans-serif;
+}
+
+/* ================= TESTIMONIALS ================= */
+
+.testimonials{
+    background:#f5f0e8;
+}
+
+.testimonial-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.testimonial{
+    background:white;
+    padding:35px;
+}
+
+.stars{
+    color:#a57b3c;
+    letter-spacing:4px;
+    margin-bottom:20px;
+}
+
+.testimonial p{
+    font-style:italic;
+    color:#514a43;
+    margin-bottom:20px;
+}
+
+.testimonial strong{
+    font-family:Arial,sans-serif;
+    font-size:12px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact{
+    text-align:center;
+    background:#e7ddd1;
+}
+
+.contact h2{
+    font-size:65px;
+    line-height:1;
+    margin:15px 0 20px;
+}
+
+.contact p{
+    max-width:600px;
+    margin:auto;
+    color:#625b53;
+    font-family:Arial,sans-serif;
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:35px;
+    font-family:Arial,sans-serif;
+}
+
+.socials a{
+    border-bottom:1px solid #181512;
+}
+
+/* ================= WHATSAPP ================= */
+
+.whatsapp{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    z-index:998;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#25d366;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    box-shadow:0 5px 25px rgba(0,0,0,.25);
+}
+
+/* ================= CART ================= */
+
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:1500;
+}
+
+.overlay.active{
+    display:block;
+}
+
+.cart{
+    position:absolute;
+    right:0;
+    top:0;
+    width:min(450px,100%);
+    height:100%;
+    background:#f8f4ed;
+    padding:30px;
+    overflow-y:auto;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close{
+    border:none;
+    background:none;
+    font-size:27px;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:18px 0;
+    border-bottom:1px solid #d9d0c5;
+}
+
+.cart-item button{
+    border:none;
+    background:none;
+    color:#a33;
+}
+
+.cart-total{
+    font-size:22px;
+    font-weight:bold;
+    margin:25px 0;
+}
+
+.checkout{
+    width:100%;
+    padding:15px;
+    background:#191613;
+    color:white;
+    border:none;
+}
+
+/* ================= ADMIN ================= */
+
+.admin-login,
+.admin-panel{
+    display:none;
+    position:fixed;
+    z-index:3000;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    align-items:center;
+    justify-content:center;
+}
+
+.admin-box{
+    background:#f8f4ed;
+    width:min(750px,94%);
+    max-height:90vh;
+    overflow-y:auto;
+    padding:35px;
+}
+
+.admin-box h2{
+    margin-bottom:10px;
+}
+
+.admin-box label{
+    display:block;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.admin-box input,
+.admin-box textarea,
+.admin-box select{
+    width:100%;
+    padding:12px;
+    margin:6px 0 12px;
+    border:1px solid #cfc4b8;
+    background:white;
+}
+
+.admin-box textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.admin-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.admin-buttons button{
+    padding:12px 20px;
+    border:1px solid #181512;
+}
+
+.save{
+    background:#181512;
+    color:white;
+}
+
+.admin-product{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid #d7cec3;
+    gap:15px;
+}
+
+.admin-product-info{
+    flex:1;
+}
+
+.admin-product-info strong{
+    font-size:17px;
+}
+
+.admin-status{
+    display:inline-block;
+    margin-top:5px;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.status-available{
+    color:#218838;
+}
+
+.status-sold{
+    color:#b02020;
+}
+
+.admin-actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.admin-actions button{
+    padding:8px 11px;
+    border:1px solid #999;
+    background:white;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+}
+
+.admin-actions .sold{
+    background:#9d2020;
+    color:white;
+    border-color:#9d2020;
+}
+
+.admin-actions .available{
+    background:#218838;
+    color:white;
+    border-color:#218838;
+}
+
+.admin-actions .delete{
+    color:#b00020;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#191613;
+    color:#aaa096;
+    padding:35px 7%;
+    display:flex;
+    justify-content:space-between;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    nav{
+        flex-wrap:wrap;
+    }
+
+    .nav-links{
+        order:3;
+        width:100%;
+        justify-content:center;
+    }
+
+    .hero,
+    .lessons{
+        grid-template-columns:1fr;
+    }
+
+    .products{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .why-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .testimonial-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:18px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .nav-buttons{
+        margin-left:auto;
+    }
+
+    section{
+        padding:65px 6%;
+    }
+
+    .hero{
+        padding:60px 6%;
+    }
+
+    .hero-image{
+        height:400px;
+    }
+
+    .products,
+    .why-grid{
+        grid-template-columns:1fr;
+    }
+
+    .heading h2,
+    .commission h2,
+    .lessons h2,
+    .contact h2{
+        font-size:42px;
+    }
+
+    .admin-product{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+
+    <div class="logo">ART BY ZOHRAN</div>
+
+    <div class="nav-links">
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#lessons">Lessons</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="nav-buttons">
+
+        <button class="cart-button" onclick="openCart()">
+            🛒 <span id="cartCount">0</span>
+        </button>
+
+        <button class="admin-button" onclick="openAdminLogin()">
+            🔐 Admin
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div>
+
+        <small>ORIGINAL ART · DUBAI</small>
+
+        <h1>
+            Art<br>
+            by Zohran.
+        </h1>
+
+        <p>
+            Original paintings, sketches and custom artwork —
+            created by hand and made to tell a story.
+        </p>
+
+        <a href="#shop" class="btn btn-gold">
+            Explore the Collection →
+        </a>
+
+    </div>
+
+    <div class="hero-image">
+        <span>ORIGINAL ARTWORK</span>
+    </div>
+
+</section>
+
+
+<!-- ================= SHOP ================= -->
+
+<section id="shop">
+
+    <div class="heading">
+
+        <small>THE COLLECTION</small>
+
+        <h2>Featured Artwork</h2>
+
+    </div>
+
+    <div class="products" id="products"></div>
+
+</section>
+
+
+<!-- ================= COMMISSION ================= -->
+
+<section class="commission">
+
+    <h2>
+        Your idea.<br>
+        Painted by hand.
+    </h2>
+
+    <p>
+        Have a special person, memory or idea you want
+        turned into artwork? Commission a unique piece
+        made specifically for you.
+    </p>
+
+    <a href="#contact" class="btn">
+        Start a Commission →
+    </a>
+
+</section>
+
+
+<!-- ================= WHY ================= -->
+
+<section id="about">
+
+    <div class="heading">
+
+        <small>THE PROMISE</small>
+
+        <h2>Why Collect From Me</h2>
+
+    </div>
+
+    <div class="why-grid">
+
+        <div class="why">
+            <div class="why-icon">🎨</div>
+            <h3>Hand Made</h3>
+            <p>Every piece is created by hand.</p>
+        </div>
+
+        <div class="why">
+            <div class="why-icon">✦</div>
+            <h3>Original</h3>
+            <p>Unique artwork signed by the artist.</p>
+        </div>
+
+        <div class="why">
+            <div class="why-icon">🖌️</div>
+            <h3>Custom</h3>
+            <p>Personal commissions created around your idea.</p>
+        </div>
+
+        <div class="why">
+            <div class="why-icon">📦</div>
+            <h3>Carefully Packed</h3>
+            <p>Your artwork is prepared carefully for delivery.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LESSONS ================= -->
+
+<section id="lessons" class="lessons">
+
+    <div>
+
+        <small>LEARN ART</small>
+
+        <h2>
+            Create.<br>
+            Learn.<br>
+            Experiment.
+        </h2>
+
+        <p>
+            Learn drawing and painting through simple,
+            practical lessons and personal guidance.
+        </p>
+
+        <a href="https://wa.me/971564233680?text=Hi%20Zohran,%20I%20want%20information%20about%20art%20lessons."
+           target="_blank"
+           class="btn btn-gold">
+            Book a Lesson →
+        </a>
+
+    </div>
+
+    <div class="lesson-box">
+
+        <h3>Lessons include</h3>
+
+        <div>✓ Drawing fundamentals</div>
+        <div>✓ Sketching techniques</div>
+        <div>✓ Painting basics</div>
+        <div>✓ Colour & composition</div>
+        <div>✓ Personal guidance</div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TESTIMONIALS ================= -->
+
+<section class="testimonials">
+
+    <div class="heading">
+
+        <small>COLLECTORS</small>
+
+        <h2>What People Say</h2>
+
+    </div>
+
+    <div class="testimonial-grid">
+
+        <div class="testimonial">
+
+            <div class="stars">★★★★★</div>
+
+            <p>
+                "The portrait turned out beautifully.
+                It made the perfect gift."
+            </p>
+
+            <strong>SARA M. · DUBAI</strong>
+
+        </div>
+
+        <div class="testimonial">
+
+            <div class="stars">★★★★★</div>
+
+            <p>
+                "The details and texture are even better
+                in person."
+            </p>
+
+            <strong>BILAL K. · COLLECTOR</strong>
+
+        </div>
+
+        <div class="testimonial">
+
+            <div class="stars">★★★★★</div>
+
+            <p>
+                "The tutorials made drawing feel much
+                easier for me."
+            </p>
+
+            <strong>AYESHA R. · STUDENT</strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact" class="contact">
+
+    <small>GET IN TOUCH</small>
+
+    <h2>
+        Every stroke<br>
+        is a story.
+    </h2>
+
+    <p>
+        For artwork, commissions, lessons or collaborations,
+        contact Zohran directly on WhatsApp.
+    </p>
+
+    <br>
+
+    <a href="https://wa.me/971564233680"
+       target="_blank"
+       class="btn btn-gold">
+        WhatsApp Zohran
+    </a>
+
+    <div class="socials">
+
+        <a href="https://www.instagram.com/artbyzohran/"
+           target="_blank">
+            Instagram
+        </a>
+
+        <a href="https://www.tiktok.com/@artbyzohran"
+           target="_blank">
+            TikTok
+        </a>
+
+        <a href="https://www.threads.net/@zzohranzeb"
+           target="_blank">
+            Threads
+        </a>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div>© 2026 Art by Zohran</div>
+
+    <div>
+        Original Paintings · Commissions · Lessons
+    </div>
+
+</footer>
+
+
+<!-- WHATSAPP -->
+
+<a class="whatsapp"
+   href="https://wa.me/971564233680"
+   target="_blank">
+    ☎
+</a>
+
+
+<!-- ================= CART ================= -->
+
+<div class="overlay" id="cartOverlay">
+
+    <div class="cart">
+
+        <div class="cart-header">
+
+            <h2>Your Cart</h2>
+
+            <button class="close"
+                    onclick="closeCart()">
+                ×
+            </button>
+
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total">
+            Total: AED <span id="cartTotal">0</span>
+        </div>
+
+        <button class="checkout"
+                onclick="checkoutWhatsApp()">
+            Order Through WhatsApp
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ADMIN LOGIN ================= -->
+
+<div class="admin-login"
+     id="adminLogin">
+
+    <div class="admin-box">
+
+        <h2>🔐 Admin Login</h2>
+
+        <p>Enter your admin password.</p>
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Admin password"
+            onkeydown="if(event.key==='Enter') loginAdmin()">
+
+        <div class="admin-buttons">
+
+            <button class="save"
+                    onclick="loginAdmin()">
+                Login
+            </button>
+
+            <button onclick="closeAdmin()">
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ADMIN PANEL ================= -->
+
+<div class="admin-panel"
+     id="adminPanel">
+
+    <div class="admin-box">
+
+        <div class="cart-header">
+
+            <h2>🎨 Art Admin Panel</h2>
+
+            <button class="close"
+                    onclick="closeAdmin()">
+                ×
+            </button>
+
+        </div>
+
+
+        <h3>Add New Artwork</h3>
+
+
+        <label>Artwork Name</label>
+
+        <input
+            type="text"
+            id="newName"
+            placeholder="Example: Golden Dreams">
+
+
+        <label>Price (AED)</label>
+
+        <input
+            type="number"
+            id="newPrice"
+            placeholder="850">
+
+
+        <label>Description</label>
+
+        <textarea
+            id="newDescription"
+            placeholder="Describe the artwork..."></textarea>
+
+
+        <label>Image URL</label>
+
+        <input
+            type="text"
+            id="newImage"
+            placeholder="https://example.com/image.jpg">
+
+
+        <label>Category</label>
+
+        <select id="newCategory">
+
+            <option>Painting</option>
+            <option>Portrait</option>
+            <option>Sketch</option>
+            <option>Abstract</option>
+            <option>Commission</option>
+
+        </select>
+
+
+        <div class="admin-buttons">
+
+            <button class="save"
+                    onclick="addProduct()">
+                ➕ Add Artwork
+            </button>
+
+            <button onclick="clearForm()">
+                Clear
+            </button>
+
+        </div>
+
+
+        <br><br>
+
+
+        <h3>Manage Artwork</h3>
+
+        <div id="adminProducts"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   PRODUCT DATA
+===================================================== */
+
+let products =
+JSON.parse(localStorage.getItem("zohranProducts")) || [
+
+    {
+        id:1,
+        name:"Gold Study No. 4",
+        price:850,
+        description:"Acrylic & gold leaf on canvas",
+        image:"",
+        category:"Painting",
+        soldOut:false
+    },
+
+    {
+        id:2,
+        name:"Portrait Commission",
+        price:400,
+        description:"Graphite portrait on cotton paper",
+        image:"",
+        category:"Portrait",
+        soldOut:false
+    },
+
+    {
+        id:3,
+        name:"Quiet Valley",
+        price:620,
+        description:"Ink & watercolour study",
+        image:"",
+        category:"Painting",
+        soldOut:false
+    },
+
+    {
+        id:4,
+        name:"Studio Original",
+        price:1200,
+        description:"Large textured canvas",
+        image:"",
+        category:"Abstract",
+        soldOut:false
+    },
+
+    {
+        id:5,
+        name:"Mini Abstracts",
+        price:220,
+        description:"Set of three small original artworks",
+        image:"",
+        category:"Abstract",
+        soldOut:false
+    },
+
+    {
+        id:6,
+        name:"Custom Artwork",
+        price:500,
+        description:"Your idea, painted by hand",
+        image:"",
+        category:"Commission",
+        soldOut:false
+    }
+
+];
+
+
+/* =====================================================
+   CART
+===================================================== */
+
+let cart =
+JSON.parse(localStorage.getItem("zohranCart")) || [];
+
+
+function saveProducts(){
+
+    localStorage.setItem(
+        "zohranProducts",
+        JSON.stringify(products)
+    );
+
+}
+
+
+function saveCart(){
+
+    localStorage.setItem(
+        "zohranCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =====================================================
+   DISPLAY PRODUCTS
+===================================================== */
+
+function displayProducts(){
+
+    const container =
+        document.getElementById("products");
+
+    container.innerHTML = "";
+
+
+    products.forEach(product => {
+
+        const sold =
+            product.soldOut === true;
+
+
+        let imageHTML;
+
+
+        if(product.image){
+
+            imageHTML =
+            `<img src="${escapeHTML(product.image)}"
+                  alt="${escapeHTML(product.name)}">`;
+
+        }else{
+
+            imageHTML =
+            `<div class="art-placeholder">
+                ${escapeHTML(product.category)}
+             </div>`;
+
+        }
+
+
+        container.innerHTML += `
+
+        <div class="product ${sold ? "sold" : ""}">
+
+            <div class="product-image">
+
+                ${imageHTML}
+
+                ${sold
+                    ? `<div class="sold-badge">
+                         SOLD OUT
+                       </div>`
+                    : ""
+                }
+
+            </div>
+
+
+            <div class="product-info">
+
+                <h3>
+                    ${escapeHTML(product.name)}
+                </h3>
+
+                <div class="product-price">
+                    AED ${Number(product.price).toLocaleString()}
+                </div>
+
+                <div class="product-desc">
+                    ${escapeHTML(product.description)}
+                </div>
+
+
+                <div class="product-actions">
+
+                    <button
+                        onclick="addToCart(${product.id})"
+                        ${sold ? "disabled" : ""}>
+
+                        ${sold
+                            ? "Sold Out"
+                            : "Add to Cart"
+                        }
+
+                    </button>
+
+
+                    <button
+                        onclick="buyNow(${product.id})"
+                        ${sold ? "disabled" : ""}>
+
+                        ${sold
+                            ? "Unavailable"
+                            : "Buy Now"
+                        }
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =====================================================
+   ADD TO CART
+===================================================== */
+
+function addToCart(id){
+
+    const product =
+        products.find(p => p.id === id);
+
+    if(!product) return;
+
+
+    if(product.soldOut){
+
+        alert("This artwork is sold out.");
+
+        return;
+
+    }
+
+
+    cart.push(product);
+
+    saveCart();
+
+    updateCart();
+
+    alert(
+        product.name +
+        " added to your cart! 🎨"
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE CART
+===================================================== */
+
+function updateCart(){
+
+    document.getElementById("cartCount")
+        .textContent = cart.length;
+
+
+    const items =
+        document.getElementById("cartItems");
+
+    items.innerHTML = "";
+
+
+    let total = 0;
+
+
+    cart.forEach((item,index)=>{
+
+        total += Number(item.price);
+
+
+        items.innerHTML += `
+
+        <div class="cart-item">
+
+            <div>
+
+                <strong>
+                    ${escapeHTML(item.name)}
+                </strong>
+
+                <br>
+
+                AED ${Number(item.price).toLocaleString()}
+
+            </div>
+
+
+            <button
+                onclick="removeFromCart(${index})">
+
+                Remove
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+
+    document.getElementById("cartTotal")
+        .textContent =
+        total.toLocaleString();
+
+}
+
+
+function removeFromCart(index){
+
+    cart.splice(index,1);
+
+    saveCart();
+
+    updateCart();
+
+}
+
+
+/* =====================================================
+   CART WINDOW
+===================================================== */
+
+function openCart(){
+
+    document
+        .getElementById("cartOverlay")
+        .classList.add("active");
+
+}
+
+
+function closeCart(){
+
+    document
+        .getElementById("cartOverlay")
+        .classList.remove("active");
+
+}
+
+
+/* =====================================================
+   BUY NOW
+===================================================== */
+
+function buyNow(id){
+
+    const product =
+        products.find(p => p.id === id);
+
+    if(!product) return;
+
+
+    if(product.soldOut){
+
+        alert("This artwork is sold out.");
+
+        return;
+
+    }
+
+
+    const message =
+        `Hi Zohran! I'm interested in buying "${product.name}" for AED ${product.price}.`;
+
+
+    window.open(
+        "https://wa.me/971564233680?text=" +
+        encodeURIComponent(message),
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   WHATSAPP CHECKOUT
+===================================================== */
+
+function checkoutWhatsApp(){
+
+    if(cart.length === 0){
+
+        alert("Your cart is empty.");
+
+        return;
+
+    }
+
+
+    let message =
+        "Hi Zohran! I would like to order:%0A%0A";
+
+
+    let total = 0;
+
+
+    cart.forEach(item=>{
+
+        message +=
+        `• ${item.name} — AED ${item.price}%0A`;
+
+        total += Number(item.price);
+
+    });
+
+
+    message +=
+        `%0ATotal: AED ${total}`;
+
+
+    window.open(
+        "https://wa.me/971564233680?text=" +
+        message,
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
+
+function openAdminLogin(){
+
+    document
+        .getElementById("adminLogin")
+        .style.display = "flex";
+
+
+    setTimeout(()=>{
+
+        document
+            .getElementById("adminPassword")
+            .focus();
+
+    },100);
+
+}
+
+
+function loginAdmin(){
+
+    const password =
+        document.getElementById("adminPassword")
+        .value;
+
+
+    if(password === "8484"){
+
+        document
+            .getElementById("adminLogin")
+            .style.display = "none";
+
+
+        document
+            .getElementById("adminPanel")
+            .style.display = "flex";
+
+
+        document
+            .getElementById("adminPassword")
+            .value = "";
+
+
+        displayAdminProducts();
+
+    }else{
+
+        alert("❌ Incorrect password.");
+
+    }
+
+}
+
+
+function closeAdmin(){
+
+    document
+        .getElementById("adminLogin")
+        .style.display = "none";
+
+
+    document
+        .getElementById("adminPanel")
+        .style.display = "none";
+
+}
+
+
+/* =====================================================
+   ADD PRODUCT
+===================================================== */
+
+function addProduct(){
+
+    const name =
+        document.getElementById("newName")
+        .value.trim();
+
+
+    const price =
+        document.getElementById("newPrice")
+        .value;
+
+
+    const description =
+        document.getElementById("newDescription")
+        .value.trim();
+
+
+    const image =
+        document.getElementById("newImage")
+        .value.trim();
+
+
+    const category =
+        document.getElementById("newCategory")
+        .value;
+
+
+    if(!name || !price){
+
+        alert(
+            "Please enter the artwork name and price."
+        );
+
+        return;
+
+    }
+
+
+    const newProduct = {
+
+        id:Date.now(),
+
+        name:name,
+
+        price:Number(price),
+
+        description:
+            description ||
+            "Original artwork by Zohran",
+
+        image:image,
+
+        category:category,
+
+        soldOut:false
+
+    };
+
+
+    products.push(newProduct);
+
+    saveProducts();
+
+    displayProducts();
+
+    displayAdminProducts();
+
+    clearForm();
+
+
+    alert(
+        "🎨 Artwork added successfully!"
+    );
+
+}
+
+
+/* =====================================================
+   ADMIN PRODUCT LIST
+===================================================== */
+
+function displayAdminProducts(){
+
+    const container =
+        document.getElementById("adminProducts");
+
+    container.innerHTML = "";
+
+
+    products.forEach(product=>{
+
+        const sold =
+            product.soldOut === true;
+
+
+        container.innerHTML += `
+
+        <div class="admin-product">
+
+            <div class="admin-product-info">
+
+                <strong>
+                    ${escapeHTML(product.name)}
+                </strong>
+
+                <br>
+
+                AED ${Number(product.price).toLocaleString()}
+
+                <br>
+
+                <span class="admin-status
+                    ${sold
+                        ? "status-sold"
+                        : "status-available"
+                    }">
+
+                    ${sold
+                        ? "● SOLD OUT"
+                        : "● AVAILABLE"
+                    }
+
+                </span>
+
+            </div>
+
+
+            <div class="admin-actions">
+
+                <button
+                    class="${sold ? "available" : "sold"}"
+                    onclick="toggleSoldOut(${product.id})">
+
+                    ${sold
+                        ? "✓ Make Available"
+                        : "🔴 Mark Sold Out"
+                    }
+
+                </button>
+
+
+                <button
+                    class="delete"
+                    onclick="deleteProduct(${product.id})">
+
+                    🗑 Delete
+
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =====================================================
+   SOLD OUT TOGGLE
+===================================================== */
+
+function toggleSoldOut(id){
+
+    const product =
+        products.find(p => p.id === id);
+
+
+    if(!product) return;
+
+
+    product.soldOut =
+        !product.soldOut;
+
+
+    saveProducts();
+
+    displayProducts();
+
+    displayAdminProducts();
+
+
+    if(product.soldOut){
+
+        alert(
+            product.name +
+            " is now marked SOLD OUT."
+        );
+
+    }else{
+
+        alert(
+            product.name +
+            " is now AVAILABLE again."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DELETE PRODUCT
+===================================================== */
+
+function deleteProduct(id){
+
+    const product =
+        products.find(p => p.id === id);
+
+
+    if(!product) return;
+
+
+    if(!confirm(
+        `Delete "${product.name}"?`
+    )) return;
+
+
+    products =
+        products.filter(
+            product => product.id !== id
+        );
+
+
+    saveProducts();
+
+    displayProducts();
+
+    displayAdminProducts();
+
+}
+
+
+/* =====================================================
+   CLEAR FORM
+===================================================== */
+
+function clearForm(){
+
+    document.getElementById("newName").value = "";
+
+    document.getElementById("newPrice").value = "";
+
+    document.getElementById("newDescription").value = "";
+
+    document.getElementById("newImage").value = "";
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   ESCAPE KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeCart();
+            closeAdmin();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+displayProducts();
+
+updateCart();
+
+</script>
+
+</body>
+</html>
